@@ -7,6 +7,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        manrope: ["Manrope", "system-ui", "sans-serif"],
+        roboto: ["Roboto Flex", "system-ui", "sans-serif"],
+      },
       colors: {
 
         background: "#131416",

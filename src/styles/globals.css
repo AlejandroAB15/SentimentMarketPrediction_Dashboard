@@ -19,3 +19,10 @@
   --color-danger: #e43b59;
 
 }
+
+@layer base {
+  body {
+    @apply bg-background text-text font-manrope antialiased;
+  }
+}
+
