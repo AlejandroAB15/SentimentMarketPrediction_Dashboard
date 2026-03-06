@@ -18,6 +18,14 @@
   --color-warning: #d7ab46;
   --color-danger: #e43b59;
 
+  --color-text-muted: rgba(222,226,230,0.6);
+  --color-text-subtle: rgba(222,226,230,0.25);
+
+  --color-grid-line: rgba(222,226,230,0.08);
+
+  --color-bar-fill-soft: rgba(23,124,124,0.85);
+
+  --color-hover-surface: rgba(255,255,255,0.04);
 }
 
 @layer base {
