@@ -11,8 +11,8 @@ const topbarConfig: Record<string, TopbarItem> = {
     description: "Métricas generales del pipeline",
   },
   "/adquisicion": {
-    title: "Adquisición",
-    description: "Extracción de noticias desde medios digitales",
+    title: "Pipeline de adquisición de noticias",
+    description: "Flujo de procesamiento utilizado para recolectar, extraer y almacenar artículos periodísticos",
   },
   "/preprocesado": {
     title: "Preprocesado",
