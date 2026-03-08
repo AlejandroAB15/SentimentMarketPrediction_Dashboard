@@ -5,6 +5,7 @@ import AdquisicionTimelineChart from "../components/ui/TimelineAdquisicion"
 import VolumenMensualChart from "../components/ui/VolumenMensualChart"
 import PerfilFuenteChart from "../components/ui/PerfilFuenteChart"
 import SectionHeader from "../components/ui/SectionHeader"
+import AnimatedContainer from "../components/ui/AnimatedContainer"
 
 export default function Adquisicion() {
 
@@ -38,14 +39,14 @@ export default function Adquisicion() {
         posteriormente se descarga el contenido completo de cada noticia para su
         almacenamiento y procesamiento posterior dentro del sistema.
       </div>
-
-      <PipelineCard
-        totalArticulos={data.resumen.totalArticulos}
-        numeroFuentes={data.resumen.numeroFuentes}
-        fechaInicio={data.articulosPorDia[0]?.fecha}
-        fechaFin={data.articulosPorDia[data.articulosPorDia.length - 1]?.fecha}
-      />
-
+      <AnimatedContainer delay={0.1}>
+        <PipelineCard
+          totalArticulos={data.resumen.totalArticulos}
+          numeroFuentes={data.resumen.numeroFuentes}
+          fechaInicio={data.articulosPorDia[0]?.fecha}
+          fechaFin={data.articulosPorDia[data.articulosPorDia.length - 1]?.fecha}
+        />
+      </AnimatedContainer>
       <div className="flex flex-col gap-4">
 
         <SectionHeader

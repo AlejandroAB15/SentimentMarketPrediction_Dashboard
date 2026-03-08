@@ -5,6 +5,7 @@ import StatCard from "../components/ui/StatCard";
 import SentimentPieChart from "../components/ui/SentimentPieChart";
 import FuentesBarChart from "../components/ui/FuentesBarChart";
 import RangoCard from "../components/ui/RangoDatasetCard";
+import AnimatedContainer from "../components/ui/AnimatedContainer";
 
 export default function Overview() {
   const { data, isLoading, isError } = useOverview();
@@ -37,6 +38,7 @@ export default function Overview() {
 
       <div className="grid grid-cols-4 gap-7">
 
+      <AnimatedContainer delay={0}>
         <StatCard
           title="Artículos originales"
           value={data.totales.original}
@@ -44,7 +46,9 @@ export default function Overview() {
           icon={<Database size={18} />}
           accent="primary"
         />
+      </AnimatedContainer>
 
+      <AnimatedContainer delay={0.05}>
         <StatCard
           title="Artículos finales"
           value={data.totales.articulos}
@@ -52,7 +56,9 @@ export default function Overview() {
           icon={<FileText size={18} />}
           accent="success"
         />
+      </AnimatedContainer>
 
+      <AnimatedContainer delay={0.1}>
         <StatCard
           title="No relevantes"
           value={data.totales.noRelevantes}
@@ -60,7 +66,9 @@ export default function Overview() {
           icon={<FilterX size={18} />}
           accent="warning"
         />
+      </AnimatedContainer>
 
+      <AnimatedContainer delay={0.15}>
         <StatCard
           title="Tasa de error"
           value={`${data.clasificacion.tasaError}%`}
@@ -68,12 +76,16 @@ export default function Overview() {
           icon={<AlertTriangle size={18} />}
           accent="danger"
         />
+      </AnimatedContainer>
+
       </div>
       
-      <RangoCard
-        fechaMinima={data.rangoFechas.fecha_minima}
-        fechaMaxima={data.rangoFechas.fecha_maxima}
-      />
+      <AnimatedContainer delay={0.2}>
+        <RangoCard
+          fechaMinima={data.rangoFechas.fecha_minima}
+          fechaMaxima={data.rangoFechas.fecha_maxima}
+        />
+      </AnimatedContainer>
 
       <div className="grid grid-cols-2 gap-7">
 
@@ -86,6 +98,6 @@ export default function Overview() {
       />
 
     </div>
-    </div>
+  </div>
   );
 }

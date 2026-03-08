@@ -1,3 +1,5 @@
+import { motion } from "framer-motion"
+
 type FunnelItem = {
   label: string
   value: number
@@ -48,20 +50,30 @@ export default function PreprocesadoFunnelChart({ data }: Props) {
 
           return (
             <div key={index} className="w-full flex justify-center">
-              <div
+
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 80,
+                  damping: 18,
+                  delay: index * 0.08
+                }}
+                style={{
+                  transformOrigin: "center",
+                  width: `${width}%`,
+                  clipPath: `polygon(${slope}% 0%, ${100 - slope}% 0%, ${100 - (slope * 1.5)}% 100%, ${slope * 1.5}% 100%)`
+                }}
                 className={`
                   relative h-20 flex items-center justify-between
                   px-16
-                  transition-all duration-500
                   ${isLast
                     ? "bg-gradient-to-r from-[#177c7c] to-[#1da1a1] text-white shadow-[0_10px_40px_rgba(23,124,124,0.2)]"
                     : "bg-[#24272b] text-text/70 border-x border-white/5"}
                 `}
-                style={{
-                  width: `${width}%`,
-                  clipPath: `polygon(${slope}% 0%, ${100 - slope}% 0%, ${100 - (slope * 1.5)}% 100%, ${slope * 1.5}% 100%)`
-                }}
               >
+
                 <span
                   className={`text-base font-semibold ${
                     isLast ? "text-white" : "text-[#177c7c]"
@@ -78,19 +90,23 @@ export default function PreprocesadoFunnelChart({ data }: Props) {
                   >
                     {item.value.toLocaleString()}
                   </span>
+
                   {item.percentage !== undefined && (
-                  <span className="text-xs bg-black/20 px-2 py-1 rounded font-mono opacity-60">
-                    -{item.percentage}%
-                  </span>
+                    <span className="text-xs bg-black/20 px-2 py-1 rounded font-mono opacity-60">
+                      -{item.percentage}%
+                    </span>
                   )}
                 </div>
-              </div>
+
+              </motion.div>
+
             </div>
           )
         })}
+
       </div>
+
     </div>
 
   )
-
 }

@@ -1,4 +1,5 @@
 import { Calendar, Clock, Flag } from "lucide-react";
+import { motion } from "framer-motion";
 
 type Props = {
   fechaMinima: string;
@@ -23,10 +24,10 @@ export default function RangoDatasetCard({ fechaMinima, fechaMaxima }: Props) {
 
   return (
     <div className="bg-surface-1 border border-primary rounded-xl p-6 flex flex-col gap-6 w-full">
-      
+
       <div className="flex justify-between items-start">
         <div className="space-y-1">
-          <p className="text-lgtracking-widest text-primary font-medium uppercase">
+          <p className="text-lg tracking-widest text-primary font-medium uppercase">
             Cobertura del dataset
           </p>
 
@@ -46,24 +47,55 @@ export default function RangoDatasetCard({ fechaMinima, fechaMaxima }: Props) {
       </div>
 
       <div className="relative mt-2">
-        <div className="h-4 w-full bg-primary rounded-full flex justify-between items-center px-4 relative overflow-hidden shadow-[0_0_15px_rgba(0,255,200,0.2)]">
-          {puntos.map((_, i) => (
-            <div key={i} className="w-2 h-2 rounded-full bg-white/40 shadow-sm" />
-          ))}
+
+        <div className="h-4 w-full bg-primary/25 rounded-full relative overflow-hidden">
+
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 90,
+              damping: 20
+            }}
+            style={{ transformOrigin: "left" }}
+            className="absolute left-0 top-0 h-full w-full bg-primary rounded-full"
+          />
+
+          <div className="absolute inset-0 flex justify-between items-center px-4">
+            {puntos.map((_, i) => (
+              <div
+                key={i}
+                className="w-2 h-2 rounded-full bg-white/40"
+              />
+            ))}
+          </div>
+
         </div>
 
         <div className="flex justify-between mt-3 px-1">
           <span className="text-xs font-semibold text-primary/70 tracking-widest uppercase">
-            {inicio.toLocaleDateString("es-MX", { day: "2-digit", month: "short", year: "numeric" })}
+            {inicio.toLocaleDateString("es-MX", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric"
+            })}
           </span>
+
           <span className="text-xs font-semibold text-primary/70 tracking-widest uppercase text-right">
-            {fin.toLocaleDateString("es-MX", { day: "2-digit", month: "short", year: "numeric" })}
+            {fin.toLocaleDateString("es-MX", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric"
+            })}
           </span>
         </div>
+
       </div>
 
       <div className="w-full flex justify-center mt-6">
         <div className="grid md:grid-cols-3 gap-9 w-full max-w">
+
           <div className="bg-primary/10 rounded-xl px-6 py-6 min-h-32 relative overflow-hidden flex flex-col justify-center group">
 
             <div className="relative z-10 flex flex-col gap-1">
@@ -74,6 +106,7 @@ export default function RangoDatasetCard({ fechaMinima, fechaMaxima }: Props) {
                 {formatoFecha(inicio)}
               </div>
             </div>
+
             <Flag
               size={80}
               className="absolute right-5 bottom-3 text-primary opacity-40"
@@ -81,6 +114,7 @@ export default function RangoDatasetCard({ fechaMinima, fechaMaxima }: Props) {
           </div>
 
           <div className="bg-primary/10 rounded-xl px-6 py-6 min-h-32 relative overflow-hidden flex flex-col justify-center group">
+
             <div className="relative z-10 flex flex-col gap-1">
               <span className="text-base font-bold tracking-widest uppercase text-primary pb-3">
                 Fecha final
@@ -89,10 +123,15 @@ export default function RangoDatasetCard({ fechaMinima, fechaMaxima }: Props) {
                 {formatoFecha(fin)}
               </div>
             </div>
-            <Calendar size={80} className="absolute right-4 bottom-2 text-primary opacity-40 rotate-6" />
+
+            <Calendar
+              size={80}
+              className="absolute right-4 bottom-2 text-primary opacity-40 rotate-6"
+            />
           </div>
 
           <div className="bg-primary/10 rounded-xl px-6 py-6 min-h-32 relative overflow-hidden flex flex-col justify-center group">
+
             <div className="relative z-10 flex flex-col gap-1">
               <span className="text-base font-bold tracking-widest uppercase text-primary pb-3">
                 Cobertura total
@@ -101,11 +140,16 @@ export default function RangoDatasetCard({ fechaMinima, fechaMaxima }: Props) {
                 {duracionDias} días
               </div>
             </div>
-            <Clock size={80} className="absolute right-4 bottom-2 text-primary opacity-40" />
+
+            <Clock
+              size={80}
+              className="absolute right-4 bottom-2 text-primary opacity-40"
+            />
           </div>
 
         </div>
       </div>
+
     </div>
   );
 }

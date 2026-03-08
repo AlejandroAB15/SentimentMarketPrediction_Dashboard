@@ -8,6 +8,7 @@ import SentimentDistributionChart from "../components/ui/SentimentDistributionCh
 import SentimentEvolutionChart from "../components/ui/SentimentEvolutionChart";
 
 import ModelDiagnosticCard from "../components/ui/ModelDiagnosticCard";
+import AnimatedContainer from "../components/ui/AnimatedContainer";
 
 import {
   Database,
@@ -40,49 +41,61 @@ export default function Clasificacion() {
   return (
     <div className="space-y-8">
 
-      <ClasificacionLogicPanel />
+      <AnimatedContainer>
+        <ClasificacionLogicPanel />
+      </AnimatedContainer>
 
       <section className="grid grid-cols-5 gap-4">
 
-        <StatCardTrend
-          title="Artículos clasificados"
-          value={data.resumen.totalClasificados}
-          icon={<Database size={18} />}
-          accent="primary"
-          trend={data.evolucion.map(e => e.POS + e.NEG + e.NEU)}
-        />
+        <AnimatedContainer delay={0.05}>
+          <StatCardTrend
+            title="Artículos clasificados"
+            value={data.resumen.totalClasificados}
+            icon={<Database size={18} />}
+            accent="primary"
+            trend={data.evolucion.map(e => e.POS + e.NEG + e.NEU)}
+          />
+        </AnimatedContainer>
 
-        <StatCardTrend
-          title="Positivos"
-          value={data.conteo.POS}
-          icon={<TrendingUp size={18} />}
-          accent="success"
-          trend={data.evolucion.map(e => e.POS)}
-        />
+        <AnimatedContainer delay={0.08}>
+          <StatCardTrend
+            title="Positivos"
+            value={data.conteo.POS}
+            icon={<TrendingUp size={18} />}
+            accent="success"
+            trend={data.evolucion.map(e => e.POS)}
+          />
+        </AnimatedContainer>
 
-        <StatCardTrend
-          title="Negativos"
-          value={data.conteo.NEG}
-          icon={<TrendingDown size={18} />}
-          accent="danger"
-          trend={data.evolucion.map(e => e.NEG)}
-        />
+        <AnimatedContainer delay={0.11}>
+          <StatCardTrend
+            title="Negativos"
+            value={data.conteo.NEG}
+            icon={<TrendingDown size={18} />}
+            accent="danger"
+            trend={data.evolucion.map(e => e.NEG)}
+          />
+        </AnimatedContainer>
 
-        <StatCardTrend
-          title="Neutrales"
-          value={data.conteo.NEU}
-          icon={<Minus size={18} />}
-          accent="warning"
-          trend={data.evolucion.map(e => e.NEU)}
-        />
+        <AnimatedContainer delay={0.14}>
+          <StatCardTrend
+            title="Neutrales"
+            value={data.conteo.NEU}
+            icon={<Minus size={18} />}
+            accent="warning"
+            trend={data.evolucion.map(e => e.NEU)}
+          />
+        </AnimatedContainer>
 
-        <StatCardTrend
-          title="Tasa de error"
-          value={`${data.resumen.tasaError}%`}
-          icon={<AlertTriangle size={18} />}
-          accent="danger"
-          trend={data.evolucion.map(e => e.ERROR)}
-        />
+        <AnimatedContainer delay={0.17}>
+          <StatCardTrend
+            title="Tasa de error"
+            value={`${data.resumen.tasaError}%`}
+            icon={<AlertTriangle size={18} />}
+            accent="danger"
+            trend={data.evolucion.map(e => e.ERROR)}
+          />
+        </AnimatedContainer>
 
       </section>
 
@@ -99,7 +112,9 @@ export default function Clasificacion() {
           </div>
 
           <div className="flex-1">
-            <ModelDiagnosticCard />
+            <AnimatedContainer delay={0.2}>
+              <ModelDiagnosticCard />
+            </AnimatedContainer>
           </div>
 
         </div>
