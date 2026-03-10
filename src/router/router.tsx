@@ -6,17 +6,20 @@ import Clasificacion from "../pages/Clasificacion";
 import Prediccion from "../pages/Prediccion";
 import Overview from "../pages/Overview";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      element: <DashboardLayout />,
+      children: [
+        { path: "/", element: <Overview /> },
+        { path: "/adquisicion", element: <Adquisicion /> },
+        { path: "/preprocesado", element: <Preprocesado /> },
+        { path: "/clasificacion", element: <Clasificacion /> },
+        { path: "/prediccion", element: <Prediccion /> },
+      ],
+    },
+  ],
   {
-    element: <DashboardLayout />,
-    children: [
-      { path: "/", element: <Overview /> },
-      { path: "/adquisicion", element: <Adquisicion /> },
-      { path: "/preprocesado", element: <Preprocesado /> },
-      { path: "/clasificacion", element: <Clasificacion /> },
-      { path: "/prediccion", element: <Prediccion /> },
-    ],
-  },
-]);
-
-export default router
+    basename: import.meta.env.BASE_URL
+  }
+);
