@@ -9,15 +9,16 @@ import Overview from "../pages/Overview";
 export const router = createBrowserRouter(
   [
     {
+      path: "/",
       element: <DashboardLayout />,
       children: [
-        { path: "/", element: <Overview /> },
-        { path: "/adquisicion", element: <Adquisicion /> },
-        { path: "/preprocesado", element: <Preprocesado /> },
-        { path: "/clasificacion", element: <Clasificacion /> },
-        { path: "/prediccion", element: <Prediccion /> },
-      ],
-    },
+        { index: true, element: <Overview /> },
+        { path: "adquisicion", element: <Adquisicion /> },
+        { path: "preprocesado", element: <Preprocesado /> },
+        { path: "clasificacion", element: <Clasificacion /> },
+        { path: "prediccion", element: <Prediccion /> }
+      ]
+    }
   ],
   {
     basename: import.meta.env.BASE_URL
