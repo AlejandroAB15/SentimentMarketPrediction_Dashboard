@@ -24,8 +24,8 @@ export default function Sidebar() {
 
       <div className="h-20 flex items-center gap-3 px-4 border-b border-primaryDark">
         <img
-          src="/favicon.svg"
-          className="w-7 h-7"
+          src={`${import.meta.env.BASE_URL}favicon.svg`} 
+          className="w-7 h-7" 
         />
 
         <span className="text-sm font-semibold text-text/90">
