@@ -4,7 +4,6 @@ import PredictionTabs from "../components/ui/PredictionTabs";
 import PredictionHeader from "../components/ui/PredictionHeader";
 import MainPredictionChart from "../components/ui/MainPredictionChart";
 import ErrorChart from "../components/ui/ErrorChart";
-import DifferenceChart from "../components/ui/DifferenceChart";
 import ScatterChart from "../components/ui/ScatterChart";
 import InsightsPanel from "../components/ui/InsightsPanel";
 
@@ -37,13 +36,11 @@ export default function Prediccion() {
 
       <MainPredictionChart data={data.series} />
 
-      <div className="grid grid-cols-2 gap-7">
+      <div className="w-full">
         <ErrorChart data={data.error} />
-        <DifferenceChart data={data.diferencia} />
       </div>
 
-      {/* Tercera fila */}
-      <div className="grid grid-cols-2 gap-7">
+      <div className="grid grid-cols-2 gap-10">
         <ScatterChart
           data={data.scatter}
           modeloGanador={
