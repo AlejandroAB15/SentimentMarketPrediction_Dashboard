@@ -43,13 +43,12 @@ export default function Prediccion() {
       <div className="grid grid-cols-2 gap-10">
         <ScatterChart
           data={data.scatter}
-          modeloGanador={
-            data.metricas.mape_especifico < data.metricas.mape_general
-              ? "especifico"
-              : "general"
-          }
+          modeloGanador={(data.resumen?.mejor_modelo.con_futuro.tipo || "general") as "especifico" | "general"}
         />
-        <InsightsPanel data={data.raw} />
+        <InsightsPanel 
+          data={data.raw} 
+          ganadorOficial={data.resumen?.mejor_modelo.con_futuro.tipo} 
+        />
       </div>
 
     </div>
