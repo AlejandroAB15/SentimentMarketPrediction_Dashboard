@@ -1,37 +1,52 @@
 import { apiFetch } from "./api";
 
+export type ModeloDetalle = {
+  pred: number;
+  error: number;
+  ventana: number;
+  alpha?: number;
+};
+
 export type PrediccionItem = {
   fecha: string;
   segmento: "train" | "test";
-
   close_real: number;
 
-  pred_general: number;
-  pred_especifico: number;
-
-  error_general: number;
-  error_especifico: number;
+  modelos: {
+    general: {
+      base: ModeloDetalle;
+      ponderado: ModeloDetalle;
+    };
+    especifico: {
+      base: ModeloDetalle;
+      ponderado: ModeloDetalle;
+    };
+  };
 };
 
 export type PrediccionResponse = PrediccionItem[];
 
 export type MetricasResponse = {
   indice: string;
-  mape_general: number;
-  mape_especifico: number;
+  general: {
+    base: number;
+    ponderado: number;
+  };
+  especifico: {
+    base: number;
+    ponderado: number;
+  };
 };
 
 export type ResumenModelosResponse = {
   indices: {
     indice: string;
-    mejor_modelo: {
-      con_futuro: {
-        tipo: string;
-        mape: number;
-        ventana: number;
-      };
-    };
+    general_base: number;
+    general_ponderado: number;
+    especifico_base: number;
+    especifico_ponderado: number;
   }[];
+  fecha_actualizacion: string;
 };
 
 export function fetchPrediccion(indice: string) {

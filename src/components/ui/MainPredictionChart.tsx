@@ -16,8 +16,8 @@ type Props = {
   data: {
     fecha: string;
     real: number;
-    general: number;
-    especifico: number;
+    base: number;
+    ponderado: number;
     segmento: "train" | "test";
   }[];
 };
@@ -63,7 +63,9 @@ const CustomTooltip = ({ active, payload }: any) => {
             />
             <span className="text-text/60 capitalize">{entry.name}:</span>
             <span className="text-text font-mono">
-              {entry.value.toLocaleString("es-MX", { minimumFractionDigits: 2 })}
+              {entry.value.toLocaleString("es-MX", {
+                minimumFractionDigits: 2,
+              })}
             </span>
           </div>
         ))}
@@ -76,22 +78,23 @@ const CustomTooltip = ({ active, payload }: any) => {
 };
 
 export default function MainPredictionChart({ data }: Props) {
-
   const processedData = useMemo(() => {
     return data.map((d, index) => {
       const isTrain = d.segmento === "train";
       const isTest = d.segmento === "test";
-      
-      const isTransitionPoint = 
+
+      const isTransitionPoint =
         (isTrain && data[index + 1]?.segmento === "test") ||
         (isTest && data[index - 1]?.segmento === "train");
 
       return {
         ...d,
-        genTrain: isTrain || isTransitionPoint ? d.general : null,
-        genTest: isTest || isTransitionPoint ? d.general : null,
-        espTrain: isTrain || isTransitionPoint ? d.especifico : null,
-        espTest: isTest || isTransitionPoint ? d.especifico : null,
+
+        baseTrain: isTrain || isTransitionPoint ? d.base : null,
+        baseTest: isTest || isTransitionPoint ? d.base : null,
+
+        pondTrain: isTrain || isTransitionPoint ? d.ponderado : null,
+        pondTest: isTest || isTransitionPoint ? d.ponderado : null,
       };
     });
   }, [data]);
@@ -104,8 +107,12 @@ export default function MainPredictionChart({ data }: Props) {
   return (
     <div className="w-full h-[450px] bg-surface-1 border border-primaryDark rounded-xl p-6">
       <div className="mb-6">
-        <h3 className="text-xl font-semibold text-text">Tendencia de Predicción</h3>
-        <p className="text-base text-text/60">Comparativa de modelos vs Valor Real</p>
+        <h3 className="text-xl font-semibold text-text">
+          Tendencia de Predicción
+        </h3>
+        <p className="text-base text-text/60">
+          Comparativa entre la versión base y ponderada respecto al valor real
+        </p>
       </div>
 
       <ResponsiveContainer width="100%" height="85%">
@@ -113,11 +120,15 @@ export default function MainPredictionChart({ data }: Props) {
           data={processedData}
           margin={{ top: 10, right: 20, left: 30, bottom: 0 }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="#1e293b"
+            vertical={false}
+          />
 
-          <XAxis 
-            dataKey="fecha" 
-            tick={<CustomTick />} 
+          <XAxis
+            dataKey="fecha"
+            tick={<CustomTick />}
             minTickGap={30}
             axisLine={false}
           />
@@ -129,27 +140,38 @@ export default function MainPredictionChart({ data }: Props) {
             tickLine={false}
           />
 
-          <Tooltip content={<CustomTooltip />} cursor={{ stroke: "rgba(23, 124, 124,0.7)", strokeWidth: 1 }} />
-          
-          <Legend 
-            verticalAlign="top" 
+          <Tooltip
+            content={<CustomTooltip />}
+            cursor={{ stroke: "rgba(23, 124, 124,0.7)", strokeWidth: 1 }}
+          />
+
+          <Legend
+            verticalAlign="top"
             align="right"
             iconType="circle"
-            wrapperStyle={{ paddingBottom: "20px", fontSize: "12px" }}
+            wrapperStyle={{
+              paddingBottom: "20px",
+              fontSize: "12px",
+            }}
           />
 
           {transitionDate && (
-            <ReferenceLine x={transitionDate} stroke="#6366f1" strokeDasharray="3 3">
+            <ReferenceLine
+              x={transitionDate}
+              stroke="#6366f1"
+              strokeDasharray="3 3"
+            >
               <Label
                 value="Inicio de Predicción"
                 position="top"
-                fill="#6366f1"
+                fill="#d4d4d4"
                 fontSize={10}
                 fontWeight="bold"
               />
             </ReferenceLine>
           )}
 
+          {/* Real */}
           <Line
             type="monotone"
             dataKey="real"
@@ -157,47 +179,47 @@ export default function MainPredictionChart({ data }: Props) {
             strokeWidth={2}
             dot={false}
             name="Real"
-            zIndex={10}
+          />
+
+          {/* Base */}
+          <Line
+            type="monotone"
+            dataKey="baseTrain"
+            stroke="#3b82f6"
+            strokeWidth={2}
+            dot={false}
+            name="Base (Entrenamiento)"
           />
 
           <Line
             type="monotone"
-            dataKey="genTrain"
-            stroke="#3b82f6"
-            strokeWidth={2}
-            dot={false}
-            name="General (Entrenamiento)"
-            activeDot={{ r: 4 }}
-          />
-          <Line
-            type="monotone"
-            dataKey="genTest"
+            dataKey="baseTest"
             stroke="#93c5fd"
             strokeWidth={2}
             strokeDasharray="5 5"
             dot={false}
-            name="General (Prueba)"
+            name="Base (Prueba)"
           />
 
+          {/* Ponderado */}
           <Line
             type="monotone"
-            dataKey="espTrain"
+            dataKey="pondTrain"
             stroke="#22c55e"
             strokeWidth={2}
             dot={false}
-            name="Específico (Entrenamiento)"
+            name="Ponderado (Entrenamiento)"
           />
 
           <Line
             type="monotone"
-            dataKey="espTest"
-            stroke="#86efac" 
+            dataKey="pondTest"
+            stroke="#86efac"
             strokeWidth={2}
             strokeDasharray="5 5"
             dot={false}
-            name="Específico (Prueba)"
+            name="Ponderado (Prueba)"
           />
-          
         </LineChart>
       </ResponsiveContainer>
     </div>
