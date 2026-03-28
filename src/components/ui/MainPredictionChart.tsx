@@ -171,7 +171,6 @@ export default function MainPredictionChart({ data }: Props) {
             </ReferenceLine>
           )}
 
-          {/* Real */}
           <Line
             type="monotone"
             dataKey="real"
@@ -181,7 +180,6 @@ export default function MainPredictionChart({ data }: Props) {
             name="Real"
           />
 
-          {/* Base */}
           <Line
             type="monotone"
             dataKey="baseTrain"
@@ -201,7 +199,6 @@ export default function MainPredictionChart({ data }: Props) {
             name="Base (Prueba)"
           />
 
-          {/* Ponderado */}
           <Line
             type="monotone"
             dataKey="pondTrain"

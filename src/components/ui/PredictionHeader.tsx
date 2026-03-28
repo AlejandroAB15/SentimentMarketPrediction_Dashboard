@@ -21,7 +21,6 @@ export default function PredictionHeader({ metricas, tipo }: Props) {
   return (
     <div className="w-full bg-surface-1 border border-primaryDark rounded-2xl p-7 shadow-sm">
 
-      {/* 🔹 Encabezado */}
       <div className="flex justify-between items-start mb-6">
         <div className="flex flex-col gap-1">
           <h3 className="text-xl font-semibold text-text">
@@ -33,10 +32,8 @@ export default function PredictionHeader({ metricas, tipo }: Props) {
         </div>
       </div>
 
-      {/* 🔹 Métricas */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 
-        {/* Base */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2 text-text/40">
             <Target size={14} />
@@ -52,7 +49,6 @@ export default function PredictionHeader({ metricas, tipo }: Props) {
           </div>
         </div>
 
-        {/* Ponderado */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2 text-primary/60">
             <Zap size={14} />
@@ -68,7 +64,6 @@ export default function PredictionHeader({ metricas, tipo }: Props) {
           </div>
         </div>
 
-        {/* Diferencia */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2 text-text/40">
             <Info size={14} />
@@ -86,7 +81,6 @@ export default function PredictionHeader({ metricas, tipo }: Props) {
           </div>
         </div>
 
-        {/* Mejor */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2 text-success/60">
             <Trophy size={14} />
