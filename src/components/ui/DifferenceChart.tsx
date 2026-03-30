@@ -60,7 +60,6 @@ export default function DifferenceChart({ data }: Props) {
   return (
     <div className="w-full bg-surface-1 border border-primaryDark rounded-xl p-5 overflow-hidden">
 
-      {/* Header */}
       <div className="flex flex-col gap-1 mb-4">
         <span className="text-sm text-text/80">
           Comparación de desempeño entre modelos
@@ -80,13 +79,11 @@ export default function DifferenceChart({ data }: Props) {
             margin={{ top: 10, right: 20, left: 12, bottom: 10 }}
           >
 
-            {/* Grid */}
             <CartesianGrid
               stroke="rgba(222,226,230,0.08)"
               strokeDasharray="3 3"
             />
 
-            {/* Línea base */}
             <ReferenceLine
               y={0}
               stroke="#dee2e6"
@@ -100,7 +97,6 @@ export default function DifferenceChart({ data }: Props) {
               }}
             />
 
-            {/* Eje X */}
             <XAxis
               dataKey="fecha"
               tickFormatter={formatFecha}
@@ -108,7 +104,6 @@ export default function DifferenceChart({ data }: Props) {
               minTickGap={20}
             />
 
-            {/* Eje Y */}
             <YAxis
               domain={domain}
               tickFormatter={formatNumber}
@@ -116,10 +111,8 @@ export default function DifferenceChart({ data }: Props) {
               width={60}
             />
 
-            {/* Tooltip */}
             <Tooltip content={<CustomTooltip />} />
 
-            {/* Legend */}
             <Legend
               wrapperStyle={{
                 fontSize: "12px",
@@ -127,7 +120,6 @@ export default function DifferenceChart({ data }: Props) {
               }}
             />
 
-            {/* Línea principal */}
             <Line
               type="monotone"
               dataKey="valor"
